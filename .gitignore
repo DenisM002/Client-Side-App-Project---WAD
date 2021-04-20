@@ -1,0 +1,8 @@
+node_modules/*
+bin/*.dll
+obj/*
+*.sln
+*.log
+package-lock.json
+public/javascript/auth0-variables.js
+config/db_config.json
