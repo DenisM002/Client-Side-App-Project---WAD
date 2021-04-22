@@ -1,7 +1,7 @@
 // Modified Auth0 code (available in Documentation, modified by Enda)
 // check login status
 function checkStatus() {
-    // Get access tokem from browser sessionStorage
+    // Get access token from browser sessionStorage
     const accessToken = sessionStorage.getItem('accessToken');
     // Check if expired
     const expirationDate = new Date(Number.parseInt(sessionStorage.getItem('expirationDate')));

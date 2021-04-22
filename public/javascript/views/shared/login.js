@@ -1,5 +1,5 @@
 // Get User log in status and update Login links.
-// Assign event listeners to logi, logout, and profile links
+// Assign event listeners to login, logout, and profile links
 
 // Import dependencies required to manage user login, etc.
 import { auth0WebAuth, auth0Authentication } from '../../auth/auth0-variables.js';
@@ -16,7 +16,7 @@ function toggleLinks(loggedIn) {
         document.getElementById('login').style.display = 'block';
         document.getElementById('logout').style.display = 'none'
         document.getElementById('get-profile').style.display = 'none';
-        document.getElementById('createPostSaveBtn').style.display = 'none';
+        //document.getElementById('createPostSaveBtn').style.display = 'none';
     }
 } // End Function
 

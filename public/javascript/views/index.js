@@ -4,6 +4,29 @@
 import * as postData from '../dataAccess/postData.js';
 import { Post } from '../models/post.js';
 
+// Auth0 dependencies
+import { API_ROLES } from '../auth/auth0-variables.js';
+import { checkAuth } from '../auth/jwtAuth.js';
+
+/*
+// Function to display ownerPage.html page if logged in as owner
+let displayOwnerAccess = () => {
+
+   // check user permissions
+    // Does the token contain these roles?
+    // const showUpdate = checkAuth(API_ROLES.UPDATE_ORDER);
+    // const showDelete = checkAuth(API_ROLES.DELETE_ORDER);
+    // const showAdd = checkAuth(API_ROLES.CREATE_ORDER);
+    const showRead = checkAuth(API_ROLES.READ_ORDER)
+
+    // Show button if user has permission to add products
+    if (showRead) {
+      document.getElementById('ownerAccessBtn').innerHTML = '<a  class="nav-link" href="ownerPage.html">Owner Access<span class="sr-only"></span></a>';
+    } else {
+      document.getElementById('ownerAccessBtn').style.display = 'none';
+    }
+}
+*/
 
 // Create post cards
 // Display in web page

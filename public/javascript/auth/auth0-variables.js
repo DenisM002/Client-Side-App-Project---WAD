@@ -2,14 +2,14 @@
 // api roles
 const API_ROLES = {
     
-    CREATE_ORDER: 'create:orders',
-    READ_ORDER: 'read:orders',
-    UPDATE_ORDER: 'update:orders',
-    DELETE_ORDER: 'delete:orders'
+    CREATE_POST: 'create:posts',
+    READ_POST: 'read:posts',
+    UPDATE_POST: 'update:posts',
+    DELETE_POST: 'delete:posts'
 };
 
 // The Auth0 id for this app
-const AUTH0_CLIENT_ID = 'JCwacEGweyjrrVztPYUJz6JdZaJexL0S';
+const AUTH0_CLIENT_ID = 'pUhe4YOAhgUCpzhDQtdY0tTeY5cZJWiJ';
 
 // Your Auth0 domain aka account/ tenant
 const AUTH0_DOMAIN = 'serverside.eu.auth0.com';
