@@ -8,6 +8,10 @@ import { Post } from '../models/post.js';
 import { API_ROLES } from '../auth/auth0-variables.js';
 import { checkAuth } from '../auth/jwtAuth.js';
 
+// Import dependencies required to manage user login, etc.
+import { auth0WebAuth, auth0Authentication } from '../auth/auth0-variables.js';
+import { getAccessToken, checkSession, saveAuthResult, checkStatus } from '../auth/jwtAuth.js';
+
 /*
 // Function to display ownerPage.html page if logged in as owner
 let displayOwnerAccess = () => {
@@ -31,46 +35,65 @@ let displayOwnerAccess = () => {
 // Create post cards
 // Display in web page
 let displayPosts = ((posts) => {
-  // Use the Array map method to iterate through the array of products (in json format)
-  const postCards = posts.map(postCard => {
-    postCard = `<div class="card mt-3">
-                  <div class="card-body">
-                    <div>
-                      <h4 class="mt-2 card-title"> ${postCard.post_title} </h4>
-                        <div class="card-text mt-4"> 
-                           ${postCard.post_body}
-                        </div>
-                        <div>
-                          <button id="${postCard._id}" type="button" class="btn btn-primary editPostBtn" data-bs-toggle="modal" data-bs-target="#newPostFormStatic">Edit</button>
-                          <button id="${postCard._id}" type="button" class="btn btn-primary deletePostBtn" >Delete post</button>
+  let postCards;
+  // Returns true if user is logged in
+  if (checkStatus()){
+      // Use the Array map method to iterate through the array of products (in json format)
+      postCards = posts.map(postCard => {
+      postCard = `<div class="card mt-3">
+                    <div class="card-body">
+                      <div>
+                        <h4 class="mt-2 card-title"> ${postCard.post_title} </h4>
+                          <div class="card-text mt-4"> 
+                            ${postCard.post_body}
+                          </div>
+                          <div class="adminBtns">
+                            <button id="${postCard._id}" type="button" class="btn btn-primary editPostBtn" data-bs-toggle="modal" data-bs-target="#newPostFormStatic">Edit</button>
+                            <button id="${postCard._id}" type="button" class="btn btn-primary deletePostBtn" >Delete post</button>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </div>`;
+                    </div>`;
+      return postCard;
 
-    return postCard;
+  }) } else {
+    postCards = posts.map(postCard => {
+      postCard = `<div class="card mt-3">
+                    <div class="card-body">
+                      <div>
+                        <h4 class="mt-2 card-title"> ${postCard.post_title} </h4>
+                          <div class="card-text mt-4"> 
+                            ${postCard.post_body}
+                          </div>
+                          <div class="adminBtns">
+                          </div>
+                        </div>
+                      </div>
+                    </div>`;
+      return postCard;
+    })
+  };
 
-  })
-  // Set the innerHTML of the postCards root element = rows
-  // join('') converts the rows array to a string, replacing the ',' delimiter with '' (blank)
-  document.getElementById('postCards').innerHTML = postCards.join('');
+    // Set the innerHTML of the postCards root element = rows
+    // join('') converts the rows array to a string, replacing the ',' delimiter with '' (blank)
+    document.getElementById('postCards').innerHTML = postCards.join('');
 
-  // Add event listener to button - 'Create Post' and call functions 
-  const savePostButton = document.getElementById('createPostSaveBtn');
-  const cancelPostButton = document.getElementById('cancelPostBtn');
+    // Add event listener to button - 'Create Post' and call functions 
+    const savePostButton = document.getElementById('createPostSaveBtn');
+    const cancelPostButton = document.getElementById('cancelPostBtn');
 
-  const editPostButtons = document.getElementsByClassName('editPostBtn');
-  const deletePostButtons = document.getElementsByClassName('deletePostBtn');
+    const editPostButtons = document.getElementsByClassName('editPostBtn');
+    const deletePostButtons = document.getElementsByClassName('deletePostBtn');
 
-  savePostButton.addEventListener("click", addOrUpdatePost);
-  cancelPostButton.addEventListener("click", resetForm);
+    savePostButton.addEventListener("click", addOrUpdatePost);
+    cancelPostButton.addEventListener("click", resetForm);
 
-
-  // Edit Button
-  for (let i = 0; i < editPostButtons.length; i++) {
-    editPostButtons[i].addEventListener("click", preparePostUpdate);
-    deletePostButtons[i].addEventListener("click", deletePost);
-  }
+    // Edit Button
+    for (let i = 0; i < editPostButtons.length; i++) {
+      editPostButtons[i].addEventListener("click", preparePostUpdate);
+      deletePostButtons[i].addEventListener("click", deletePost);
+    }
+  
 });
 
 
