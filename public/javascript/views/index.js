@@ -57,10 +57,14 @@ let displayPosts = ((posts) => {
 
   // Add event listener to button - 'Create Post' and call functions 
   const savePostButton = document.getElementById('createPostSaveBtn');
+  const cancelPostButton = document.getElementById('cancelPostBtn');
+
   const editPostButtons = document.getElementsByClassName('editPostBtn');
   const deletePostButtons = document.getElementsByClassName('deletePostBtn');
 
   savePostButton.addEventListener("click", addOrUpdatePost);
+  cancelPostButton.addEventListener("click", resetForm);
+
 
   // Edit Button
   for (let i = 0; i < editPostButtons.length; i++) {
@@ -113,6 +117,8 @@ async function preparePostUpdate() {
 
 // Create PostDetails object
 let addOrUpdatePost = async () => {
+  document.getElementById('modalTitle').innerHTML = "New Post";
+
   const newPost = getPostFormData();
     // log to console
   console.log(newPost);
@@ -130,6 +136,11 @@ async function deletePost() {
   if (result === true) {
       loadPosts();
   }
+}
+
+// Fix Form Title bug
+async function resetForm() {
+  document.getElementById('modalTitle').innerHTML = "New Post";
 }
 
 

@@ -43,6 +43,7 @@ document.getElementById('logout').addEventListener('click', function (event) {
     console.log('Logged out');
 }, false);
 
+/*
 // get user profile from Auth0
 document.getElementById('get-profile').addEventListener('click', async function (event) {
     event.preventDefault();
@@ -58,6 +59,7 @@ document.getElementById('get-profile').addEventListener('click', async function 
         document.getElementById('results').innerHTML = `<pre>${JSON.stringify(usrInfo, null, 2)}</pre>`;
     });
 }, false);
+*/
 
 // When page is loaded
 window.onload = (event) => {

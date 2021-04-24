@@ -12,7 +12,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
         <div class="container">
-            <a class="navbar-brand text-danger" href="#">GossipBoard</a>
+            <a class="navbar-brand text-danger" href="./index.html">GossipBoard</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
                 aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -29,7 +29,7 @@
                                 class="bi bi-box-arrow-in-right link-icon"></span>Login</a>
                     </li>
                     <li class="nav-item">
-                        <a id="get-profile" class="nav-link" href="#">
+                        <a id="get-profile" class="nav-link" href="./userProfile.html">
                             <span class="bi bi-person-fill link-icon"></span>Profile</a>
                     </li>
                     <li class="nav-item">
@@ -92,12 +92,20 @@
                 </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button id="cancelPostBtn" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button id="createPostSaveBtn" type="button" data-bs-dismiss="modal" class="btn btn-primary">Save</button>
                 </div>
             </div>
         </div>
     </div>
+
+    <footer>
+
+        <!-- Create a footer!!! -->
+
+
+
+    </footer>
 
 
     <!-- Load BootStrap 5 CSS -->
@@ -110,9 +118,8 @@
     <!-- JavaScript Bundle with jQuery and Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
-        crossorigin="anonymous"></script>
-
-    <script src="./javascript/views/index.js" type="module"></script>
+        crossorigin="anonymous">
+    </script>
 
 
     <!-- Auth0 JavaScript -->
