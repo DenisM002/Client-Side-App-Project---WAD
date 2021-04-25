@@ -53,9 +53,9 @@ let displayPosts = ((posts) => {
                           <div class="card-text mt-4"> 
                             ${postCard.post_body}
                           </div>
-                          <div class="adminBtns">
-                            <button id="${postCard._id}" type="button" class="btn btn-primary editPostBtn" data-bs-toggle="modal" data-bs-target="#newPostFormStatic">Edit</button>
-                            <button id="${postCard._id}" type="button" class="btn btn-primary deletePostBtn" >Delete post</button>
+                          <div class="adminBtns float-right">
+                            <button id="${postCard._id}" type="button" class="btn btn-success editPostBtn p-md-3 mx-2 mt-2 float-end bi bi-pencil-square" data-bs-toggle="modal" data-bs-target="#newPostFormStatic"> Edit</button>
+                            <button id="${postCard._id}" type="button" class="btn btn-warning deletePostBtn p-md-3 mx-2 mt-2 float-end bi bi-trash" > Delete post</button>
                           </div>
                         </div>
                       </div>
