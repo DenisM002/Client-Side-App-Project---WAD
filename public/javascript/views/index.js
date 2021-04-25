@@ -35,6 +35,8 @@ let displayOwnerAccess = () => {
 // Create post cards
 // Display in web page
 let displayPosts = ((posts) => {
+  getUserProfile();
+
   let postCards;
 
   // Check user permission
@@ -49,7 +51,8 @@ let displayPosts = ((posts) => {
                     <div class="card-body">
                       <div>
                         <h4 class="mt-2 card-title"> ${postCard.post_title} </h4>
-                        <h6 class="card-subtitle m-2 text-muted">By username</h6>
+                        <h6 class="card-subtitle m-2 text-muted">By ${postCard.user_id}</h6>
+                        <hr>
                           <div class="card-text mt-4"> 
                             ${postCard.post_body}
                           </div>
@@ -68,7 +71,9 @@ let displayPosts = ((posts) => {
                     <div class="card-body">
                       <div>
                         <h4 class="mt-2 card-title"> ${postCard.post_title} </h4>
-                          <div class="card-text mt-4"> 
+                        <h6 class="card-subtitle m-2 text-muted">By ${postCard.user_id}</h6>  
+                        <hr>
+                        <div class="card-text mt-4"> 
                             ${postCard.post_body}
                           </div>
                           <div class="adminBtns">
@@ -108,6 +113,41 @@ let displayPosts = ((posts) => {
 });
 
 
+let getUserProfile = async () => {
+  try {
+
+    auth0Authentication.userInfo(getAccessToken(), (err, usrInfo) => {
+      if (err) {
+          // handle error
+          console.error('Failed to get userInfo');
+          return;
+      }
+
+      // Output result to console (for testing purposes)
+      
+      //console.log(usrInfo);
+      let userName = usrInfo.name;
+      /*
+      let userEmail = usrInfo.email;
+      let userNickname = usrInfo.nickname;
+      let dateJoined= usrInfo.updated_at;
+      // dateJoined is just the date, no timestamp
+      let userJoined = dateJoined.substr(0,10);
+      */
+      //let userName = usrInfo.sub;
+      document.getElementById("user_id").value = userName;
+
+    
+      console.log(`User ID: ${userName}`);
+     });
+
+  } // catch and log any errors
+  catch (err) {
+    console.log(err);
+  }
+};
+
+
 // Setup post form for Update and Add Post
 function postFormSetup(title) {
   // reset the form and change the title
@@ -116,6 +156,7 @@ function postFormSetup(title) {
   // form reset doesn't work for hidden inputs!!
   // do this to reset previous id if set
   document.getElementById("_id").value = 0;
+  //document.getElementById("user_id").value = ;
 } // End function
 
 
@@ -124,7 +165,8 @@ let getPostFormData = () => {
   return new Post(
     document.getElementById("_id").value,
     document.getElementById("post_title").value,
-    document.getElementById("post_body").value
+    document.getElementById("post_body").value,
+    document.getElementById("user_id").value,
   );
 };
 
@@ -132,6 +174,7 @@ let getPostFormData = () => {
 // get by id and fill out the form
 async function preparePostUpdate() {
   try {
+
     // 1. Get post by id
     const post = await postData.getPostById(this.id);
 
@@ -142,6 +185,8 @@ async function preparePostUpdate() {
     document.getElementById("_id").value = post._id;
     document.getElementById("post_title").value = post.post_title;
     document.getElementById("post_body").value = post.post_body;
+    document.getElementById("user_id").value = post.user_id;
+    
     
   } // catch and log any errors
   catch (err) {
@@ -158,7 +203,8 @@ let addOrUpdatePost = async () => {
   console.log(newPost);
 
   postData.createOrUpdatePost(newPost);
-  
+  loadPosts()
+
   // End function
   console.log(newPost);
   loadPosts()

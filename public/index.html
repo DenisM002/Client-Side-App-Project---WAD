@@ -14,10 +14,10 @@
     <link rel="stylesheet" href="./css/style.css">
 
 
-    <title>Home page with Posts for Project Website</title>
+    <title>GossipBoard</title>
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
     
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container">
@@ -60,7 +60,7 @@
                 </div>
                 
                 <div class="col-3">
-                    <button type="button" class="btn btn-danger btn-lg p-md-4 " id="showAdminBtns" style="display:none;">
+                    <button type="button" class="btn btn-danger btn-lg p-md-4 bi bi-exclamation-triangle " id="showAdminBtns" style="display:none;">
                         Show Admin Buttons
                     </button>
                 </div>
@@ -105,6 +105,10 @@
                             <textarea class="form-control" id="post_body" rows="3"></textarea>
                         </div>
                         <div class="form-group">
+                            <!-- Hidden user_id value from Auth0 -->
+                            <input id="user_id" type="hidden" name="_id" value="">
+                        </div>
+                        <div class="form-group">
                             <!-- postId is a hidden field value is not required but set = 0-->
                             <input id="_id" type="hidden" name="_id" value="0">
                         </div>
@@ -120,13 +124,14 @@
         </div>
     </div>
 
-    <footer>
 
-        <!-- Create a footer!!! -->
-
-
-
+    <footer class="bg-light text-center text-lg-start mt-auto">
+        <div class="text-center text-light p-3" style="background-color: rgba(0, 0, 0, 1);">
+            GossipBoard© Copyright 2021
+        </div>
     </footer>
+
+
 
 
 

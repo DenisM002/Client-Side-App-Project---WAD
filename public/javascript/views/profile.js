@@ -24,14 +24,15 @@ let loadProfile = async () => {
       let dateJoined= usrInfo.updated_at;
       // dateJoined is just the date, no timestamp
       let userJoined = dateJoined.substr(0,10);
-      let userId = usrInfo.sub;   
+      let userId = usrInfo.sub;
       
       // Insert into profile page
       document.getElementById('username').innerHTML = userName;
       document.getElementById('userSince').innerHTML = userJoined;
       document.getElementById('userEmail').innerHTML = userEmail;
       document.getElementById('userNickname').innerHTML = userNickname;
-      
+      document.getElementById('userId').innerHTML = userId;
+
      });
 
   } // catch and log any errors
