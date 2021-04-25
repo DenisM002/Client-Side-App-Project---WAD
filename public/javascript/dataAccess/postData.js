@@ -54,7 +54,7 @@ try {
   // Call fetch and await the respose
   // fetch url using request object
   const response = await api.getDataAsync(url, request);
-  const json = await response.json();
+  const json = await response.data;
   // Output result to console (for testing purposes)
   console.log(json);
 

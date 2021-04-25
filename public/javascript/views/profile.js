@@ -2,7 +2,7 @@
 
 // Auth0 dependencies
 import { auth0WebAuth, auth0Authentication } from '../auth/auth0-variables.js';
-import { getAccessToken, checkSession, saveAuthResult, checkStatus } from '../auth/jwtAuth.js';
+import { getAccessToken, checkSession, saveAuthResult, checkStatus, checkAuth } from '../auth/jwtAuth.js';
 
 
 // Starting function
@@ -18,18 +18,21 @@ let loadProfile = async () => {
 
       // Output result to console (for testing purposes)
       console.log(usrInfo);
-      let userEmail = usrInfo.email;
-      console.log(userEmail);
-      let userId = usrInfo.sub;
-      document.getElementById('results').innerHTML = `<pre>${JSON.stringify(usrInfo, null, 2)}</pre>`;
-      document.getElementById('resultsEmail').innerHTML = `Email: ${userEmail}`;
-      document.getElementById('resultsId').innerHTML = `User ID: ${userId}`;
       let userName = usrInfo.name;
-      document.getElementById('resultsId').innerHTML = `Username: ${userName}`;
+      let userEmail = usrInfo.email;
+      let userNickname = usrInfo.nickname;
+      let dateJoined= usrInfo.updated_at;
+      // dateJoined is just the date, no timestamp
+      let userJoined = dateJoined.substr(0,10);
+      let userId = usrInfo.sub;   
       
-
-
-  });
+      // Insert into profile page
+      document.getElementById('username').innerHTML = userName;
+      document.getElementById('userSince').innerHTML = userJoined;
+      document.getElementById('userEmail').innerHTML = userEmail;
+      document.getElementById('userNickname').innerHTML = userNickname;
+      
+     });
 
   } // catch and log any errors
   catch (err) {
@@ -37,4 +40,8 @@ let loadProfile = async () => {
   }
 };
 
-loadProfile();
+if (checkStatus()) {
+  loadProfile();
+} else { 
+  location.replace("index.html")
+};
