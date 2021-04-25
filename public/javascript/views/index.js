@@ -36,14 +36,20 @@ let displayOwnerAccess = () => {
 // Display in web page
 let displayPosts = ((posts) => {
   let postCards;
+
+  // Check user permission
+  const showUpdate = checkAuth(API_ROLES.UPDATE_POST);
+  console.log(`Admin?: ${showUpdate}`);
+
   // Returns true if user is logged in
-  if (checkStatus()){
+  if (showUpdate){
       // Use the Array map method to iterate through the array of products (in json format)
       postCards = posts.map(postCard => {
       postCard = `<div class="card mt-3">
                     <div class="card-body">
                       <div>
                         <h4 class="mt-2 card-title"> ${postCard.post_title} </h4>
+                        <h6 class="card-subtitle m-2 text-muted">By username</h6>
                           <div class="card-text mt-4"> 
                             ${postCard.post_body}
                           </div>
@@ -81,11 +87,16 @@ let displayPosts = ((posts) => {
     // Add event listener to button - 'Create Post' and call functions 
     const savePostButton = document.getElementById('createPostSaveBtn');
     const cancelPostButton = document.getElementById('cancelPostBtn');
-
     const editPostButtons = document.getElementsByClassName('editPostBtn');
     const deletePostButtons = document.getElementsByClassName('deletePostBtn');
 
+    const adminButton = document.getElementById('showAdminBtns')
+
     savePostButton.addEventListener("click", addOrUpdatePost);
+    adminButton.addEventListener("click", reloadPage);
+
+    // Show admin buttons 
+
     cancelPostButton.addEventListener("click", resetForm);
 
     // Edit Button
@@ -166,6 +177,9 @@ async function resetForm() {
   document.getElementById('modalTitle').innerHTML = "New Post";
 }
 
+function reloadPage() {
+  location.reload()
+}
 
 
 // STARTING FUNCTION!!!!!

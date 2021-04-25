@@ -2,8 +2,8 @@
 // Assign event listeners to login, logout, and profile links
 
 // Import dependencies required to manage user login, etc.
-import { auth0WebAuth, auth0Authentication } from '../../auth/auth0-variables.js';
-import { getAccessToken, checkSession, saveAuthResult, checkStatus } from '../../auth/jwtAuth.js';
+import { auth0WebAuth, auth0Authentication, API_ROLES } from '../../auth/auth0-variables.js';
+import { getAccessToken, checkSession, saveAuthResult, checkStatus, checkAuth } from '../../auth/jwtAuth.js';
 
 // Show hide menu links based on logged in state
 function toggleLinks(loggedIn) {
@@ -12,12 +12,19 @@ function toggleLinks(loggedIn) {
         document.getElementById('login').style.display = 'none';
         document.getElementById('logout').style.display = 'block';
         document.getElementById('get-profile').style.display = 'block';
+        document.getElementById('createPostBtn').style.display = 'block';
+        
     } else {
         document.getElementById('login').style.display = 'block';
         document.getElementById('logout').style.display = 'none'
         document.getElementById('get-profile').style.display = 'none';
         //document.getElementById('createPostSaveBtn').style.display = 'none';
     }
+    if (checkAuth(API_ROLES.UPDATE_POST)) {
+        document.getElementById('showAdminBtns').style.display = 'block';
+
+    }
+
 } // End Function
 
 // Add Event Handlers for links
